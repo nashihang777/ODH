@@ -222,6 +222,11 @@ class ODHFront {
                         audiosegment += `<img class="odh-playaudio" data-nindex="${nindex}" data-dindex="${dindex}" src="${chrome.runtime.getURL('fg/img/play.png')}"/>`;
                 }
             }
+            for (const [dindex, definition] of note.definitions.entries()) {
+                let button = (services == 'none' || services == '') ? '' : `<img ${imageclass} data-nindex="${nindex}" data-dindex="${dindex}" src="${chrome.runtime.getURL('fg/img/'+ image)}" />`;
+                content += `<div class="odh-definition">${button}${definition}</div>`;
+            }
+            content += '</div>';
             content += `
                 <div class="odh-headsection">
                     <span class="odh-audios">${audiosegment}</span>
@@ -229,11 +234,6 @@ class ODHFront {
                     <span class="odh-reading">${note.reading}</span>
                     <span class="odh-extra">${note.extrainfo}</span>
                 </div>`;
-            for (const [dindex, definition] of note.definitions.entries()) {
-                let button = (services == 'none' || services == '') ? '' : `<img ${imageclass} data-nindex="${nindex}" data-dindex="${dindex}" src="${chrome.runtime.getURL('fg/img/'+ image)}" />`;
-                content += `<div class="odh-definition">${button}${definition}</div>`;
-            }
-            content += '</div>';
         }
         //content += `<textarea id="odh-context" class="odh-sentence">${this.sentence}</textarea>`;
         content += '<div id="odh-container" class="odh-sentence"></div>';
